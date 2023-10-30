@@ -1,4 +1,3 @@
-
 package com.learn.mycart.entites;
 
 import java.util.ArrayList;
@@ -11,16 +10,17 @@ import javax.persistence.Id;
 @Entity
 
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int categoryId;
     private String categoryTitle;
     private String categoryDescription;
-    
-    private List<Product> products=new ArrayList<>();
-    
-    public Category(){
-    
+
+    private List<Product> products = new ArrayList<>();
+
+    public Category() {
+
     }
 
     public Category(int categoryId, String categoryTitle, String categoryDescription) {
@@ -52,5 +52,5 @@ public class Category {
     public void setCategoryDescription(String categoryDescription) {
         this.categoryDescription = categoryDescription;
     }
-    
+
 }

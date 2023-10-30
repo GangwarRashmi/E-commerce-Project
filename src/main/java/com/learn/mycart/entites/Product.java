@@ -1,4 +1,3 @@
-
 package com.learn.mycart.entites;
 
 import javax.persistence.Column;
@@ -9,19 +8,20 @@ import javax.persistence.Id;
 
 @Entity
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int p_Id;
     private String p_Name;
-    @Column(length=3000)
+    @Column(length = 3000)
     private String p_Desc;
     private String p_Photo;
     private int p_Price;
     private int p_Discount;
     private int p_Quantity;
-    
-    public Product(){
-        
+
+    public Product() {
+
     }
 
     public Product(int p_Id, String p_Name, String p_Desc, String p_Photo, int p_Price, int p_Discount, int p_Quantity) {
@@ -94,12 +94,5 @@ public class Product {
     public String toString() {
         return "Product{" + "p_Id=" + p_Id + ", p_Name=" + p_Name + ", p_Desc=" + p_Desc + ", p_Photo=" + p_Photo + ", p_Price=" + p_Price + ", p_Discount=" + p_Discount + ", p_Quantity=" + p_Quantity + '}';
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
 }
