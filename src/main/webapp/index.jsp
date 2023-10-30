@@ -1,8 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : Oct 30, 2023, 2:00:02 AM
-    Author     : Rashmi Gangwar
---%>
 
 <%@page import="com.learn.mycart.helper.FactoryProvider"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
