@@ -11,6 +11,7 @@
 
     </head>
     <body>
+        <%@include file= "components/navbar.jsp" %>
         <h1>Hello World!</h1>
         <h1>Creation session factory object</h1>
 
