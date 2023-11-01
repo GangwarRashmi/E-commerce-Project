@@ -16,8 +16,9 @@
         <h1>Creation session factory object</h1>
 
         <%
+            out.println(FactoryProvider.getFactory()+"<br>");
+            out.println(FactoryProvider.getFactory()+"<br>");
             out.println(FactoryProvider.getFactory());
-
         %>
     </body>
 </html>
