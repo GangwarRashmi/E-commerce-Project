@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 
@@ -16,11 +17,10 @@ public class Category {
     private int categoryId;
     private String categoryTitle;
     private String categoryDescription;
-
+    @OneToMany  
     private List<Product> products = new ArrayList<>();
-
+        
     public Category() {
-
     }
 
     public Category(int categoryId, String categoryTitle, String categoryDescription) {
@@ -59,9 +59,14 @@ public class Category {
     public void setCategoryDescription(String categoryDescription) {
         this.categoryDescription = categoryDescription;
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
      public void setProducts(List<Product> products) {
         this.products = products;
     }
+     
     @Override
     public String toString() {
         return "Category{" + "categoryId=" + categoryId + ", categoryTitle=" + categoryTitle + ", categoryDescription=" + categoryDescription + '}';
