@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "User")
 public class User {
 
     @Id
@@ -38,6 +40,10 @@ public class User {
 
     public User() {
 
+    }
+
+    public User(String userName, String userEmail, String userPassword, String userPhone, String defaultjpg, String userAddress) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getUserId() {

@@ -7,9 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-
+@Table(name = "category")
 public class Category {
 
     @Id
@@ -17,23 +18,16 @@ public class Category {
     private int categoryId;
     private String categoryTitle;
     private String categoryDescription;
-    @OneToMany  
+
+    @OneToMany(mappedBy = "category")
     private List<Product> products = new ArrayList<>();
-        
+
     public Category() {
     }
 
-    public Category(int categoryId, String categoryTitle, String categoryDescription) {
-        this.categoryId = categoryId;
+    public Category(String categoryTitle, String categoryDescription) {
         this.categoryTitle = categoryTitle;
         this.categoryDescription = categoryDescription;
-    }
-    
-     public Category(int categoryId, String categoryTitle, String categoryDescription, List<Product>products) {
-        this.categoryId = categoryId;
-        this.categoryTitle = categoryTitle;
-        this.categoryDescription = categoryDescription;
-        this.products = products;
     }
 
     public int getCategoryId() {
@@ -63,15 +57,13 @@ public class Category {
     public List<Product> getProducts() {
         return products;
     }
-     public void setProducts(List<Product> products) {
+
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
-     
+
     @Override
     public String toString() {
         return "Category{" + "categoryId=" + categoryId + ", categoryTitle=" + categoryTitle + ", categoryDescription=" + categoryDescription + '}';
     }
-    
-    
-
 }
