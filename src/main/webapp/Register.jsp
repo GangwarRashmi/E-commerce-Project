@@ -45,7 +45,7 @@
 
                             </div>
                             <div class="container" text-center>
-                                <button type="register" class="btn btn-outline-register">Register</button>
+                                <button type="register" class="btn btn-outline-new">Register</button>
                                 <button type="reset" class="btn btn-outline-warning">Reset</button>
                         </form>
 

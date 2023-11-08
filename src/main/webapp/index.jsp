@@ -12,8 +12,8 @@
     </head>
     <body>
         <%@include file= "components/navbar.jsp" %>
-        <h1>Hello World!</h1>
-        <h1>Creation session factory object</h1>
+        <h1>Hello World</h1>
+        <h1>Creation Mental session object</h1>
 
         <%
             out.println(FactoryProvider.getFactory()+"<br>");
