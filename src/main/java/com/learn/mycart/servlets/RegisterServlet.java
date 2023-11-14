@@ -43,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
                 // Use try-with-resources to automatically close the session
                 Transaction tx =  hibernateSession.beginTransaction();
 
-                int id = (int) hibernateSession.save(user);
+                long id = (long) hibernateSession.save(user);
 
                 tx.commit();
                 out.println("Successfully saved");
