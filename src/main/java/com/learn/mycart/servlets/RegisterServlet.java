@@ -27,7 +27,7 @@ public class RegisterServlet extends HttpServlet {
             String userEmail = request.getParameter("user_email");
             String userPassword = request.getParameter("user_password");
             String userPhone = request.getParameter("user_phone");
-            String userAddress = request.getParameter("user_Address");
+            String userAddress = request.getParameter("user_address");
 
             // Validation
             if (userName.isEmpty()) {
@@ -43,11 +43,11 @@ public class RegisterServlet extends HttpServlet {
                 // Use try-with-resources to automatically close the session
                 Transaction tx =  hibernateSession.beginTransaction();
 
-                int Id = (int) hibernateSession.save(user);
+                int id = (int) hibernateSession.save(user);
 
                 tx.commit();
                 out.println("Successfully saved");
-                out.println("<br> User id " + Id);
+                out.println("<br> User id " + id);
             } catch (Exception e) {
                 e.printStackTrace(); // Log the exception for debugging
                 out.println("An error occurred while processing the registration.");

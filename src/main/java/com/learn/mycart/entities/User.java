@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +14,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(length = 100, name = "user_name")
@@ -27,7 +29,7 @@ public class User {
     @Column(name = "user_phone")
     private String userPhone;
 
-    @Column(length = 1500, name = "user_address")
+    @Column(length = 500, name = "user_address")
     private String userAddress;
 
     public User() {
@@ -41,9 +43,8 @@ public class User {
         this.userPhone = userPhone;
         this.userAddress = userAddress;
     }
- 
-    // Getters and setters
 
+    // Getters and setters
     public Long getId() {
         return id;
     }
