@@ -1,13 +1,13 @@
 package com.learn.mycart.Dao;
 
 import com.learn.mycart.entities.User;
-import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 public class UserDao {
 
-    private SessionFactory factory;
+    private final SessionFactory factory;
 
     public UserDao(SessionFactory factory) {
         this.factory = factory;
@@ -16,20 +16,19 @@ public class UserDao {
     public User getUserByEmailAndPassword(String email, String password) {
         User user = null;
         try {
-            String query = "from User where userEmail-: e and userPassword=: p";
+            String query = "FROM User WHERE userEmail = :e AND userPassword = :p";
             Session session = this.factory.openSession();
-            Query q = session.createQuery(query);
+            Query<User> q = session.createQuery(query, User.class);
             q.setParameter("e", email);
             q.setParameter("p", password);
-            user = (User) q.getSingleResult();
+            user = q.uniqueResult();
 
             session.close();
 
         } catch (Exception e) {
-            e.getStackTrace();
+            // Log the exception or handle it as needed
+            e.printStackTrace();
         }
         return user;
-
     }
-
 }

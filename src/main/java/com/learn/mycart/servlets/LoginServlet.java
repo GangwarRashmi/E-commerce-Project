@@ -22,7 +22,16 @@ public class LoginServlet extends HttpServlet {
 
             UserDao userdao = new UserDao(FactoryProvider.getFactory());
             User user = userdao.getUserByEmailAndPassword(email, password);
-            out.println(user);
+            String name = user.getUserName();
+
+            if (user != null) {
+                out.println("welcome "+name+" hii<br>");
+                out.println("you have successfully logged in...." + " ");
+
+            } else {
+                out.println("invalid credentials....TRY AGAIN");
+            }
+
         }
     }
 
