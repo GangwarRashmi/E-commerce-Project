@@ -1,7 +1,7 @@
 package com.learn.mycart.servlets;
 
-import com.learn.mycart.Dao.UserDao;
-import com.learn.mycart.entities.User;
+import com.learn.mycart.Dao.CategoryDao;
+import com.learn.mycart.entities.Category;
 import com.learn.mycart.helper.FactoryProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,32 +10,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LoginServlet extends HttpServlet {
+public class ProductOperationServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String op = request.getParameter("operation");
 
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
+            if (op.trim().equals("addcategory")) {
+                String title = request.getParameter("catTitle");
+                String description = request.getParameter("catDescription");
 
-            UserDao userdao = new UserDao(FactoryProvider.getFactory());
-            User user = userdao.getUserByEmailAndPassword(email, password);
-            String name = user.getUserName();
+                Category category = new Category();
+                category.setCategoryTitle(title);
+                category.setCategoryDescription(description);
 
-            if (user != null) {
-                if (name.equals("lalit")) {
-                    response.sendRedirect("admin.jsp");
-                }
-                else{
-                    response.sendRedirect("normal.jsp");
-                }
+                CategoryDao categoryDao = new CategoryDao(FactoryProvider.getFactory());
+                int catId = categoryDao.saveCategory(category);
+                
+                out.println("category saved");
+                
+                
 
-            } else {
-                response.sendRedirect("Login.jsp");
+            } else if (op.trim().equals("addproduct")) {
             }
-
         }
     }
 
