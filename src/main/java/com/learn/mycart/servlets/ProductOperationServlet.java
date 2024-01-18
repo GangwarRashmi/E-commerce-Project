@@ -29,7 +29,7 @@ public class ProductOperationServlet extends HttpServlet {
                 CategoryDao categoryDao = new CategoryDao(FactoryProvider.getFactory());
                 int catId = categoryDao.saveCategory(category);
                 
-                out.println("category saved");
+                
                 
                 
 

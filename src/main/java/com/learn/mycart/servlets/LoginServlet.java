@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class LoginServlet extends HttpServlet {
 
@@ -22,16 +23,19 @@ public class LoginServlet extends HttpServlet {
 
             UserDao userdao = new UserDao(FactoryProvider.getFactory());
             User user = userdao.getUserByEmailAndPassword(email, password);
-            String name = user.getUserName();
 
             if (user != null) {
-                if (name.equals("lalit")) {
+                // Create a session for the user
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+
+                String name = user.getUserName();
+
+                if ("lalit".equals(name)) {
                     response.sendRedirect("admin.jsp");
-                }
-                else{
+                } else {
                     response.sendRedirect("normal.jsp");
                 }
-
             } else {
                 response.sendRedirect("Login.jsp");
             }

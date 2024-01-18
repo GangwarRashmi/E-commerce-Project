@@ -97,7 +97,7 @@
 
                             </div>
                             <div class="container text-center">
-                                <button type="button" class="btn btn-outline-success">Add Category</button>
+                                <button type="submit" class="btn btn-outline-success">Add Category</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </form>
