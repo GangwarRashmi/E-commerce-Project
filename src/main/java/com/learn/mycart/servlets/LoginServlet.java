@@ -3,8 +3,10 @@ package com.learn.mycart.servlets;
 import com.learn.mycart.Dao.UserDao;
 import com.learn.mycart.entities.User;
 import com.learn.mycart.helper.FactoryProvider;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,65 +23,54 @@ public class LoginServlet extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
 
-            UserDao userdao = new UserDao(FactoryProvider.getFactory());
-            User user = userdao.getUserByEmailAndPassword(email, password);
+            System.out.println("Email: " + email);
+            System.out.println("Password: " + password);
 
+            UserDao userDao = new UserDao(FactoryProvider.getFactory());
+            User user = userDao.getUserByEmailAndPassword(email, password);
+
+            // Inside the if (user != null) block
             if (user != null) {
-                // Create a session for the user
-                HttpSession session = request.getSession();
-                session.setAttribute("user", user);
-
-                String name = user.getUserName();
-
-                if ("lalit".equals(name)) {
-                    response.sendRedirect("admin.jsp");
+                String userType = user.getUserType();
+                if (userType != null) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("userType", userType);
+                    if ("admin".equalsIgnoreCase(userType)) {
+                        response.sendRedirect("admin.jsp");
+                    } else if ("normal".equalsIgnoreCase(userType)) {
+                        response.sendRedirect("normal.jsp");
+                    } else {
+                        // Handle unknown user types or redirect to a default page
+                        out.println("Unknown user type: " + userType);
+                        response.sendRedirect("Login.jsp");
+                    }
                 } else {
-                    response.sendRedirect("normal.jsp");
+                    // Handle the case where userType is null
+                    out.println("User type is null. Check user data.");
+                    response.sendRedirect("Login.jsp");
                 }
             } else {
+                // Handle the case where the user is null
+                out.println("Login failed. Please check your credentials.");
                 response.sendRedirect("Login.jsp");
             }
-
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Login Servlet";
+    }
 }

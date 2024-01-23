@@ -15,20 +15,25 @@ public class UserDao {
 
     public User getUserByEmailAndPassword(String email, String password) {
         User user = null;
-        try {
-            String query = "FROM User WHERE userEmail = :e AND userPassword = :p";
-            Session session = this.factory.openSession();
-            Query<User> q = session.createQuery(query, User.class);
-            q.setParameter("e", email);
-            q.setParameter("p", password);
-            user = q.uniqueResult();
+        try (Session session = this.factory.openSession()) {
+            String hql = "FROM User u WHERE u.userEmail = :e AND u.userPassword = :p";
+            Query<User> query = session.createQuery(hql, User.class);
+            query.setParameter("e", email);
+            query.setParameter("p", password);
+            user = query.uniqueResult();
 
-            session.close();
+            // Log the SQL query
+            System.out.println("SQL Query: " + query.getQueryString());
 
+            // Print user details for debugging
+            if (user != null) {
+                System.out.println("User Details: " + user.getId() + ", " + user.getUserType());
+            } else {
+                System.out.println("User not found for email: " + email);
+            }
         } catch (Exception e) {
-            // Log the exception or handle it as needed
+            System.err.println("Error in UserDao.getUserByEmailAndPassword: " + e.getMessage());
             e.printStackTrace();
         }
         return user;
-    }
-}
+}}

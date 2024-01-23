@@ -15,7 +15,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class RegisterServlet extends HttpServlet {
-    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,6 +27,7 @@ public class RegisterServlet extends HttpServlet {
             String userPassword = request.getParameter("user_password");
             String userPhone = request.getParameter("user_phone");
             String userAddress = request.getParameter("user_address");
+            String userType = request.getParameter("user_type"); // Corrected this line
 
             // Validation
             if (userName.isEmpty()) {
@@ -37,11 +37,11 @@ public class RegisterServlet extends HttpServlet {
 
             // Create a User object to store data
             User user = new User(userName, userEmail, userPassword, userPhone, userAddress);
-            out.println("object created"+"<br>");
+            out.println("object created" + "<br>");
 
             try (Session hibernateSession = FactoryProvider.getFactory().openSession()) {
                 // Use try-with-resources to automatically close the session
-                Transaction tx =  hibernateSession.beginTransaction();
+                Transaction tx = hibernateSession.beginTransaction();
 
                 long id = (long) hibernateSession.save(user);
 
@@ -52,7 +52,7 @@ public class RegisterServlet extends HttpServlet {
                 e.printStackTrace(); // Log the exception for debugging
                 out.println("An error occurred while processing the registration.");
             }
-            
+
         }
     }
 
@@ -75,4 +75,3 @@ public class RegisterServlet extends HttpServlet {
         return "Servlet for user registration";
     }
 }
- 

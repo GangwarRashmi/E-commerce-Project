@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -32,6 +31,9 @@ public class User {
     @Column(length = 500, name = "user_address")
     private String userAddress;
 
+    @Column(length = 50, name = "userType")
+    private String userType;
+
     public User() {
         // Default constructor required by JPA
     }
@@ -42,6 +44,7 @@ public class User {
         this.userPassword = userPassword;
         this.userPhone = userPhone;
         this.userAddress = userAddress;
+        this.userType = "normal"; // Set a default user type
     }
 
     // Getters and setters
@@ -87,5 +90,13 @@ public class User {
 
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress;
+    }
+
+    public String getUserType() {
+        return this.userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 }
